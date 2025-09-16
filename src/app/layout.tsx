@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
 import { DM_Sans as RootFont } from "next/font/google";
-
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/features/theme/theme-provider";
 import { LocaleProvider } from "@/features/i18n/locale-provider";
 import { ReactQueryProvider } from "@/features/react-query/react-query-provider";
-
 import { cn } from "@/lib/utils";
 import { siteMetadata } from "@/lib/site";
 import { getLocale, getMessages } from "next-intl/server";
-
 import "./globals.css";
 
 const geistSans = RootFont({
@@ -26,9 +23,16 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocale();
   const messages = await getMessages();
-
+  
   return (
     <html lang={locale} className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <script 
+          async 
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5700825802140474"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className={cn("antialiased", geistSans.className)}>
         <LocaleProvider locale={locale} messages={messages}>
           <ThemeProvider>
